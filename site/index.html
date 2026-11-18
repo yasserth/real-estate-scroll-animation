@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Aurelle Residences — Private Estate</title>
+  <meta name="description" content="A private architectural residence. Scroll to walk through the estate." />
+  <meta name="theme-color" content="#0f0e0c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <a class="skip" href="#residence">Skip the film</a>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Aurelle Residences — home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">Aurelle</span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#residence">The Residence</a>
+      <a href="#details">Details</a>
+      <a href="#location">Location</a>
+    </nav>
+    <a class="topcta" href="#enquire">Private viewing</a>
+  </header>
+
+  <main id="top">
+    <!-- ============ The film: one continuous video, scrubbed by scroll ============ -->
+    <section class="film" data-film aria-label="Architectural walkthrough film">
+      <div class="film__stage" data-film-stage>
+        <img class="film__poster" data-film-poster alt="" decoding="async" hidden />
+        <video class="film__video" data-film-video muted playsinline preload="auto"></video>
+        <div class="film__veil" aria-hidden="true"></div>
+
+        <!-- Chapters: copy that fades in over a slice of the film.
+             data-from / data-to are fractions of the film (0 = first frame, 1 = last).
+             Adjust them to match the moments in your video. -->
+        <div class="film__chapter film__chapter--hero" data-film-chapter data-from="0" data-to="0.14">
+          <span class="eyebrow">A private estate</span>
+          <h1 class="display">Architecture,<br /><em>in quiet motion.</em></h1>
+          <p class="lede">Scroll to walk through the residence.</p>
+        </div>
+
+        <div class="film__chapter" data-film-chapter data-from="0.2" data-to="0.38">
+          <span class="eyebrow">I — Arrival</span>
+          <h2 class="display">A threshold of stone and light.</h2>
+          <p>Replace with a line about the approach, the façade, the first impression.</p>
+        </div>
+
+        <div class="film__chapter film__chapter--right" data-film-chapter data-from="0.42" data-to="0.6">
+          <span class="eyebrow">II — Living</span>
+          <h2 class="display">Volumes made for gathering.</h2>
+          <p>Replace with a line about the principal living spaces.</p>
+        </div>
+
+        <div class="film__chapter" data-film-chapter data-from="0.64" data-to="0.82">
+          <span class="eyebrow">III — Private quarters</span>
+          <h2 class="display">Stillness, by design.</h2>
+          <p>Replace with a line about the suites, materials, views.</p>
+        </div>
+
+        <div class="film__chapter film__chapter--center" data-film-chapter data-from="0.88" data-to="1" data-hold>
+          <span class="eyebrow">Aurelle Residences</span>
+          <h2 class="display">By appointment only.</h2>
+          <a class="btn" href="#enquire">Arrange a private viewing</a>
+        </div>
+
+        <div class="film__loader" data-film-loader hidden>
+          <span class="film__loader-bar"></span>
+          <span class="film__loader-label" data-film-loader-label></span>
+        </div>
+        <div class="film__hint" aria-hidden="true"><span>Scroll</span><i></i></div>
+      </div>
+    </section>
+
+    <aside class="rail" aria-hidden="true">
+      <span class="rail__counter" data-film-counter>01 / 05</span>
+      <span class="rail__track"><span class="rail__fill" data-film-progress></span></span>
+    </aside>
+
+    <!-- ============ Content after the film ============ -->
+    <section class="section" id="residence">
+      <div class="wrap narrow">
+        <span class="eyebrow">The Residence</span>
+        <h2 class="display">An address that needs no introduction.</h2>
+        <p class="lede">Placeholder copy. Describe the residence in two or three measured sentences — the architect, the setting, the idea behind the house.</p>
+      </div>
+    </section>
+
+    <section class="section section--line" id="details">
+      <div class="wrap">
+        <dl class="facts">
+          <div><dt>Interior</dt><dd>— m²</dd></div>
+          <div><dt>Grounds</dt><dd>— ha</dd></div>
+          <div><dt>Suites</dt><dd>—</dd></div>
+          <div><dt>Completion</dt><dd>—</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="wrap split">
+        <div>
+          <span class="eyebrow">Location</span>
+          <h2 class="display">Placeholder location.</h2>
+        </div>
+        <p>Placeholder copy about the surroundings, proximity, and privacy of the estate.</p>
+      </div>
+    </section>
+
+    <section class="section section--enquire" id="enquire">
+      <div class="wrap narrow center">
+        <span class="eyebrow">Private viewing</span>
+        <h2 class="display">Visits are arranged personally.</h2>
+        <p class="lede">Placeholder contact details.</p>
+        <a class="btn" href="mailto:viewings@example.com">viewings@example.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <span>© <span data-year></span> Aurelle Residences</span>
+      <span>All imagery is indicative.</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/film.config.js"></script>
+  <script src="assets/js/scroll-film.js"></script>
+  <script>
+    document.querySelector('[data-year]').textContent = new Date().getFullYear();
+    window.film = mountScrollFilm(document.querySelector('[data-film]'), window.FILM_CONFIG);
+  </script>
+</body>
+</html>
