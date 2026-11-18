@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" />
+  <link rel="preload" as="image" href="assets/frames/f_0000.webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body>
@@ -478,8 +479,10 @@
   <!-- Animation du hero : chargée en premier, inchangée -->
   <script src="assets/vendor/gsap.min.js"></script>
   <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
   <script src="assets/js/film.config.js"></script>
   <script src="assets/js/scroll-sequence.js"></script>
+  <script src="assets/js/smooth-scroll.js"></script>
   <script>
     window.film = mountScrollSequence(document.querySelector('[data-film]'), window.FILM_CONFIG);
   </script>

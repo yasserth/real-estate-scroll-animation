@@ -18,7 +18,9 @@ AURELLE BUSINESS RESIDENCE — French-language showcase site for a fictional pre
   - `assets/frames/f_0000.webp…` — 734 frames (24 fps, 1920×1440) from the R2 film
   - `assets/js/film.config.js` — frame count/path, focal point, scroll length, scrub smoothing
   - `assets/js/scroll-sequence.js` — Canvas + GSAP ScrollTrigger image-sequence engine
-  - `assets/vendor/` — GSAP 3.12.5 + ScrollTrigger (vendored)
+  - `assets/vendor/` — GSAP 3.12.5 + ScrollTrigger, Lenis 1.1.20 (vendored)
+  - `assets/js/smooth-scroll.js` — Lenis smooth scrolling driven by GSAP's ticker, smooth anchor navigation
+    (`window.smoothScrollTo`), scroll lock while a `<dialog>` is open; disabled under prefers-reduced-motion
   - `index.html` — hero chapters are `[data-film-chapter]` with `data-from`/`data-to` (0–1 of the film);
     then sections 02 Vision → 09 Contact, footer, and the three plateau `<dialog>`s
   - `mentions-legales.html` — legal & privacy page (placeholders « à compléter »)
@@ -28,7 +30,9 @@ AURELLE BUSINESS RESIDENCE — French-language showcase site for a fictional pre
 - `tools/extract-frames.sh` — rebuilds the frames from the original MP4 (colour-accurate BT.709→WebP)
 
 ## Content rules
-- The hero animation (frames, canvas, `scroll-sequence.js`, `film.config.js`, film scroll length) is frozen.
+- The hero frames and the film scroll length (`scrollLength: 6`) are frozen. Engine changes must keep the frames
+  untouched and be measured with real wheel input (frames per refresh, long frames, settle time) before/after.
+  Measured best on software canvas: Lenis + `scrub: 0.35`, `blend`/`decodeAhead` off (opt-in).
 - Section images are frames of the film (`assets/frames/f_XXXX.webp`), always captioned « visuel conceptuel ».
 - Never present fictional figures as facts: surfaces/rents are « indicatifs, non contractuels »; the simulator is
   « hypothèses de simulation »; services are « envisagés — à confirmer »; location/contacts « à confirmer/compléter ».

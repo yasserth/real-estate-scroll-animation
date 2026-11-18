@@ -18,9 +18,15 @@
      4. frames just ahead of the current position jump the queue
    Until a frame arrives, the nearest loaded frame is drawn instead.
 
-   Memory: frames are kept as <img> elements (compressed WebP in memory; the
-   browser's decode cache holds only recently drawn bitmaps). Nothing keeps
-   734 decoded 1920×1440 bitmaps alive.
+   Smoothness: the page scroll itself is smoothed by Lenis (smooth-scroll.js),
+   which runs inside GSAP's ticker, so each wheel notch becomes a glide and the
+   playhead advances ~1 frame per display refresh. The draw happens in the same
+   ticker frame as the scroll update. Opt-in extras (film.config.js):
+   `blend` (sub-frame crossfade) and `decodeAhead` (off-thread decode window).
+
+   Memory: frames are kept as <img> elements (compressed WebP); only the
+   sliding window (≤ decodeCache, default 24) is held decoded, at canvas size.
+   Nothing keeps 734 decoded 1920×1440 bitmaps alive.
 
    Markup contract (unchanged from the video version, see index.html):
      <section data-film> <div data-film-stage> <canvas data-film-canvas> …
@@ -65,6 +71,7 @@
     const url = i => base + (seq.prefix || 'f_') + String(i).padStart(seq.digits || 4, '0') + (seq.ext || '.webp');
     const imgs = new Array(N).fill(null);       // HTMLImageElement once requested
     const ok = new Uint8Array(N);               // 1 = loaded & decodable
+    const tries = new Uint8Array(N);            // failed attempts per frame (retried up to 3×)
     let loadedCount = 0, inflight = 0;
     const MAX_INFLIGHT = cfg.concurrency || 6;
 
@@ -77,7 +84,8 @@
     push(N - 1);
     let cursor = 0;
 
-    const state = { frame: 0, target: 0, drawn: -1, dir: 1, progress: 0, drawMs: 0 };
+    // frame: continuous playhead (GSAP) · drawn: base frame on screen · shown: drawn + blend
+    const state = { frame: 0, target: 0, drawn: -1, shown: 0, dir: 1, progress: 0, drawMs: 0, bitmaps: 0 };
 
     function nextToLoad() {
       // Frames just ahead of where the viewer is heading take priority.
@@ -101,10 +109,17 @@
           inflight--; ok[i] = 1; loadedCount++;
           setLoader(loadedCount / N);
           if (i === 0 && !root.classList.contains('has-film')) { root.classList.add('has-film'); }
-          if (state.drawn < 0 || Math.abs(i - Math.round(state.frame)) < Math.abs(state.drawn - Math.round(state.frame))) requestDraw();
+          if (state.drawn < 0 || Math.abs(i - state.frame) < Math.abs(state.drawn - state.frame)) requestDraw();
+          wantBitmaps();
           pump();
         };
-        img.onerror = () => { inflight--; console.warn('[scroll-sequence] failed to load', img.src); pump(); };
+        img.onerror = () => {
+          inflight--; imgs[i] = null;
+          // A dropped request must not leave a permanent hole: queue the frame again.
+          if (++tries[i] <= 3) { order.push(i); setTimeout(pump, 500 * tries[i]); }
+          else console.warn('[scroll-sequence] failed to load', url(i));
+          pump();
+        };
         img.src = url(i);
       }
     }
@@ -127,36 +142,90 @@
       return -1;
     }
 
-    // ---------------- canvas ----------------
-    let cssW = 0, cssH = 0;
+    // ---------------- canvas geometry ----------------
+    // object-fit: cover with a focal point — fills the screen, never stretches.
+    let geo = null;                              // { rw, rh, dx, dy } in canvas pixels
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, cfg.maxDpr || 2);
-      cssW = stage.clientWidth; cssH = stage.clientHeight;
-      // Never allocate a backing store larger than the frames can fill.
-      // (frame pixels per CSS pixel under cover-fit; no point rendering finer than that)
+      const cssW = stage.clientWidth, cssH = stage.clientHeight;
+      // Never allocate a backing store larger than the frames can fill
+      // (frame pixels per CSS pixel under cover-fit; no point rendering finer than that).
       const cover = Math.max(cssW / seq.width, cssH / seq.height);
       const k = Math.min(dpr, Math.max(1, 1 / cover));
       canvas.width = Math.round(cssW * k); canvas.height = Math.round(cssH * k);
       canvas.style.width = cssW + 'px'; canvas.style.height = cssH + 'px';
       ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-      state.drawn = -1; requestDraw();
+      const cw = canvas.width, ch = canvas.height, s = Math.max(cw / seq.width, ch / seq.height);
+      const rw = Math.round(seq.width * s), rh = Math.round(seq.height * s);
+      geo = { rw, rh, dx: Math.round((cw - rw) * focusX), dy: Math.round((ch - rh) * focusY) };
+      dropBitmaps();
+      state.drawn = -1; lastKey = -1; requestDraw();
     }
 
+    // ---------------- decoded window around the playhead ----------------
+    // Frames near the playhead are decoded OFF the main thread (createImageBitmap),
+    // already scaled to the canvas, so drawing one is a plain blit: no decode stall
+    // in the middle of a scroll. Small sliding window, biased in the direction of
+    // travel, evicted as it moves (bounded memory: BM_MAX bitmaps of canvas size).
+    // Opt-in (cfg.decodeAhead > 0): measured slower than plain drawImage on
+    // software-rendered canvases, useful only where decode stalls are visible.
+    const canBitmap = typeof createImageBitmap === 'function' && cfg.decodeAhead > 0;
+    const BM_AHEAD = cfg.decodeAhead || 0, BM_BEHIND = 4, BM_MAX = cfg.decodeCache || 24, BM_PAR = 3;
+    const bm = new Map(), bmPending = new Set();
+    let bmGen = 0;
+    function dropBitmaps() { bmGen++; bm.forEach(b => b.close && b.close()); bm.clear(); bmPending.clear(); state.bitmaps = 0; }
+    function wantBitmaps() {
+      if (!canBitmap || !geo) return;
+      const c = Math.round(state.frame);
+      const lo = c - (state.dir > 0 ? BM_BEHIND : BM_AHEAD), hi = c + (state.dir > 0 ? BM_AHEAD : BM_BEHIND);
+      bm.forEach((b, i) => { if (i < lo - 2 || i > hi + 2) { b.close && b.close(); bm.delete(i); } });
+      for (let k = 0; k <= BM_AHEAD && bmPending.size < BM_PAR; k++) {
+        for (const i of (k ? [c + state.dir * k, c - state.dir * k] : [c])) {
+          if (i < lo || i > hi || i < 0 || i >= N || !ok[i] || bm.has(i) || bmPending.has(i)) continue;
+          if (bm.size + bmPending.size >= BM_MAX || bmPending.size >= BM_PAR) return;
+          const gen = bmGen; bmPending.add(i);
+          createImageBitmap(imgs[i], { resizeWidth: geo.rw, resizeHeight: geo.rh, resizeQuality: 'high' })
+            .then(b => {
+              bmPending.delete(i);
+              if (gen !== bmGen) { b.close && b.close(); return; }
+              bm.set(i, b); state.bitmaps = bm.size;
+              if (Math.abs(i - state.frame) <= 1.5) requestDraw();
+              wantBitmaps();
+            })
+            .catch(() => { bmPending.delete(i); });
+        }
+      }
+    }
+
+    // ---------------- draw ----------------
+    // Sub-frame blending: between frame n and n+1 the canvas shows n with n+1 laid
+    // over it at the fractional opacity, so slow scrolling moves continuously
+    // instead of stepping 24 times a second. Source frames are never altered.
+    const BLEND = cfg.blend === true;   // opt-in: doubles the per-frame draw cost
+    let lastKey = -1;
+    function blit(src, alpha) {
+      ctx.globalAlpha = alpha;
+      if (src.close) ctx.drawImage(src, geo.dx, geo.dy);            // ImageBitmap: pre-scaled
+      else ctx.drawImage(src, geo.dx, geo.dy, geo.rw, geo.rh);      // <img>: scaled on draw
+    }
     function draw() {
-      const want = clamp(Math.round(state.frame), 0, N - 1);
-      const i = nearestLoaded(want);
-      if (i < 0 || i === state.drawn) return;
-      const img = imgs[i];
-      const cw = canvas.width, ch = canvas.height;
-      // object-fit: cover with a focal point — fills the screen, never stretches.
-      const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-      const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+      if (!geo) return;
+      const f = clamp(state.frame, 0, N - 1);
+      let i0 = Math.floor(f), frac = BLEND ? Math.round((f - i0) * 32) / 32 : Math.round(f - i0);
+      if (frac >= 1) { i0 = Math.min(N - 1, i0 + 1); frac = 0; }
+      const base = nearestLoaded(i0);
+      if (base < 0) return;
+      const exact = base === i0;
+      const next = exact && frac > 0 && i0 + 1 < N && ok[i0 + 1] ? i0 + 1 : -1;
+      const key = next >= 0 ? i0 + frac : base;
+      if (key === lastKey) return;
       const t0 = performance.now();
-      ctx.drawImage(img, (cw - dw) * focusX, (ch - dh) * focusY, dw, dh);
+      blit(bm.get(base) || imgs[base], 1);
+      if (next >= 0) blit(bm.get(next) || imgs[next], frac);
+      ctx.globalAlpha = 1;
       state.drawMs = performance.now() - t0;
-      state.drawn = i;
-      // Ask the browser to decode the next few frames in the direction of travel.
-      for (let k = 1; k <= 2; k++) { const j = i + state.dir * k; if (j >= 0 && j < N && ok[j] && imgs[j].decode) imgs[j].decode().catch(() => {}); }
+      state.drawn = base; state.shown = key; lastKey = key;
+      wantBitmaps();
     }
 
     let drawQueued = false;
@@ -182,7 +251,9 @@
           pump();
         },
       },
-      onUpdate: () => { state.frame = playhead.frame; requestDraw(); },
+      // Runs inside GSAP's ticker (already a requestAnimationFrame): draw in the
+      // same frame as the scroll update — no extra frame of latency.
+      onUpdate: () => { state.frame = playhead.frame; draw(); if (debug) drawDebug(); },
     });
 
     // ---------------- chapters / rail (same behaviour as before) ----------------
@@ -223,7 +294,8 @@
       dbg.textContent =
         `mode      image sequence (canvas)\n` +
         `progress  ${state.progress.toFixed(4)}\n` +
-        `frame     ${state.drawn} / ${N - 1}  (target ${Math.round(state.target)})\n` +
+        `frame     ${Number(state.shown).toFixed(2)} / ${N - 1}  (target ${Math.round(state.target)})\n` +
+        `decoded   ${state.bitmaps} bitmaps\n` +
         `loaded    ${loadedCount} / ${N}\n` +
         `draw      ${state.drawMs.toFixed(1)} ms\n` +
         `canvas    ${canvas.width}×${canvas.height}`;

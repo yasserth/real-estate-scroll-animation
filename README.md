@@ -10,8 +10,12 @@ Scrolling down advances the film frame by frame; scrolling up reverses it.
 - `site/assets/js/scroll-sequence.js` draws the current frame to a full-screen `<canvas>`.
   **GSAP ScrollTrigger** (vendored in `site/assets/vendor/`) maps scroll position to a frame
   with `scrub` smoothing, and a `requestAnimationFrame` loop redraws only when the frame changes.
-- Frames load progressively: frame 0 first, then the opening 2 s, then coarse-to-fine passes
-  over the whole film, with frames ahead of the scroll position jumping the queue.
+- Frames load progressively: frame 0 first (preloaded), then the opening 2 s, then coarse-to-fine passes
+  over the whole film, with frames ahead of the scroll position jumping the queue; a failed frame is retried.
+- **Smooth scrolling:** Lenis (vendored, MIT) interpolates the page scroll inside GSAP's ticker, so each
+  wheel notch glides and the film advances about one frame per display refresh, in both directions.
+  Menu links glide to their section (`site/assets/js/smooth-scroll.js`). Disabled when the visitor
+  prefers reduced motion.
 - Settings (scroll length, smoothing, focal point, frame path) live in `site/assets/js/film.config.js`.
 
 ## Rebuilding the frames

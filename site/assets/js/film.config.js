@@ -27,8 +27,15 @@ window.FILM_CONFIG = {
   scrollLength: 6,
 
   // GSAP ScrollTrigger scrub: seconds the frame takes to catch up with the
-  // scrollbar. Smooths mouse-wheel steps into continuous motion; 0 = locked.
-  scrub: 0.6,
+  // scroll position. The scroll is already smoothed by Lenis (smooth-scroll.js),
+  // so only a light extra cushion is needed. Measured: 0.35 s settles in ~0.6 s
+  // with ≤ 3 frames per refresh, symmetric up and down.
+  scrub: 0.35,
+
+  // Optional rendering extras, OFF by default (measured slower on software-
+  // rendered canvases; may help on some GPUs):
+  // blend: true,       // crossfade frame n → n+1 by the fractional playhead
+  // decodeAhead: 14,   // decode the next N frames off the main thread
 
   preload: 48,        // opening frames fetched first (2 s of film)
   concurrency: 6,     // parallel image requests

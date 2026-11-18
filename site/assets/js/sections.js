@@ -10,15 +10,20 @@
 
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
-  /* 1. Apparitions : une seule fois à l'entrée dans l'écran */
+  /* 1. Apparitions : une seule fois à l'entrée dans l'écran.
+        Les éléments d'une même liste (piliers, offres, services…) se révèlent
+        en cascade très courte, plafonnée pour ne jamais faire attendre. */
   document.documentElement.classList.add('reveal-ready');
   const items = $$('.reveal');
+  const groups = new Map();
+  items.forEach(el => { const g = el.parentElement; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(el); });
+  groups.forEach(list => { if (list.length > 1) list.forEach((el, i) => el.style.setProperty('--reveal-delay', Math.min(i * 70, 350) + 'ms')); });
   if (reduce || !('IntersectionObserver' in window)) {
     items.forEach(el => el.classList.add('is-in'));
   } else {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     items.forEach(el => io.observe(el));
   }
 
@@ -51,7 +56,20 @@
       if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
   }
-  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(updateNav); } }, { passive: true });
+  /* Transition film → sections : en quittant l'écran, la scène du film se fond
+     doucement dans le bleu nuit (opacité seule, rendu GPU). */
+  const stage = film && film.querySelector('[data-film-stage]');
+  let exitVeil = null;
+  if (stage) { exitVeil = document.createElement('div'); exitVeil.className = 'film__exit'; exitVeil.setAttribute('aria-hidden', 'true'); stage.appendChild(exitVeil); }
+  function updateExit() {
+    if (!exitVeil) return;
+    const r = film.getBoundingClientRect();
+    const t = Math.min(1, Math.max(0, 1 - r.bottom / innerHeight));   // 0 : scène entière · 1 : scène sortie
+    exitVeil.style.opacity = (t * t * 0.85).toFixed(3);
+  }
+  const onScroll = () => { updateNav(); updateExit(); };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  updateExit();
   addEventListener('resize', updateNav);
   updateNav();
 
@@ -72,8 +90,9 @@
     if (d && d.open) d.close();
     const sel = $('#f-surface');
     if (sel) { sel.value = a.dataset.request; sel.dispatchEvent(new Event('change', { bubbles: true })); }
-    $('#contact').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    setTimeout(() => { const f = $('#f-name'); if (f) f.focus({ preventScroll: true }); }, reduce ? 0 : 900);
+    const focusName = () => { const f = $('#f-name'); if (f) f.focus({ preventScroll: true }); };
+    if (window.smoothScrollTo) window.smoothScrollTo('#contact', { onComplete: focusName });
+    else { $('#contact').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); setTimeout(focusName, reduce ? 0 : 900); }
   }));
 
   /* 4. Simulateur « Vision économique » — hypothèses ajustables par le visiteur */
