@@ -1,0 +1,6 @@
+# Video masters & encodes live outside the repo (hosted externally)
+*.mp4
+*.mov
+*.webm
+out/
+.DS_Store
