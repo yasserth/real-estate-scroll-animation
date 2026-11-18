@@ -11,11 +11,11 @@
 ---------------------------------------------------------------------------- */
 window.FILM_CONFIG = {
   video: {
-    src: '',            // REQUIRED — desktop master, e.g. 'https://cdn.example.com/estate/film-desktop.mp4'
+    src: 'https://pub-8351e6e3f954487f8f8bb5a816edbf2a.r2.dev/1118%20(1).mp4',  // 30.6 s film on Cloudflare R2
     srcMobile: '',      // optional — lighter 720p / GOP-4 encode for phones (tools/prepare-video.sh makes it)
     poster: '',         // optional — first frame as an image, e.g. 'assets/media/poster.jpg'
     posterMobile: '',   // optional — portrait / smaller poster for phones
-    focus: '50% 50%',        // object-position of the video on wide screens
+    focus: '50% 38%',        // object-position on wide screens — the 4:3 film is cropped top/bottom; bias up to keep the spire
     focusMobile: '50% 50%',  // object-position on portrait phones (keep the building in frame)
   },
 
@@ -27,7 +27,7 @@ window.FILM_CONFIG = {
 
   // Total scroll distance of the film, in viewport heights. Longer = slower, more
   // cinematic. Roughly 1 viewport height per 3–5 seconds of video reads well.
-  scrollLength: 9,
+  scrollLength: 6,   // ~5 s of film per screen of scrolling for the 30 s film
 
   // 0..1 — how quickly the displayed frame catches up with the scroll position.
   // Lower = silkier but laggier; 1 = locked 1:1 to the scrollbar.
