@@ -22,12 +22,20 @@ AURELLE BUSINESS RESIDENCE — French-language showcase site for a fictional pre
   - `assets/js/smooth-scroll.js` — Lenis smooth scrolling driven by GSAP's ticker, smooth anchor navigation
     (`window.smoothScrollTo`), scroll lock while a `<dialog>` is open; disabled under prefers-reduced-motion
   - `index.html` — hero chapters are `[data-film-chapter]` with `data-from`/`data-to` (0–1 of the film);
-    then sections 02 Vision → 09 Contact, footer, and the three plateau `<dialog>`s
+    then sections Vision → La Résidence → Architecture → Espaces → Services → Localisation → Investir → Contact,
+    footer (graphite), and the three plateau `<dialog>`s. Tones alternate ivory (`tone-light`) / navy (`tone-dark`).
   - `mentions-legales.html` — legal & privacy page (placeholders « à compléter »)
   - `assets/css/site.css` — palette navy #171E25 / gold #C9AE83 / ivory #F4F0E8 / slate #7B858B / graphite #333D43
   - `assets/js/sections.js` — nav states, reveals, plateau dialogs, rental simulator
   - `assets/js/contact.js` + `site.config.js` — form validation; set `contact.endpoint` to receive requests
 - `tools/extract-frames.sh` — rebuilds the frames from the original MP4 (colour-accurate BT.709→WebP)
+
+## Layout system (sections after the film)
+- One 12-column grid (`.grid`, `.col-N`), `--wrap: 1440px` so content aligns with the logo at 1440 px wide.
+- One vertical rhythm: `--sec-y` per section, `--head-gap` header → content, `--block-gap` between blocks.
+- One section header: `.head` = `.eyebrow-s` (full width) · `.h2` (7 cols) · `.lead` (5 cols), tops aligned.
+- No decorative rules/numbers: structure comes from the grid, spacing and tinted panels; borders only on
+  functional elements (cards, form fields, buttons, steppers, map frame).
 
 ## Content rules
 - The hero frames and the film scroll length (`scrollLength: 6`) are frozen. Engine changes must keep the frames

@@ -101,15 +101,19 @@
     const fmt = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
     const nums = $$('input[type=number]', sim);
     const occ = $('#sim-occ', sim);
-    const out = { occ: $('[data-sim-occ]', sim), area: $('[data-sim-area]', sim), month: $('[data-sim-month]', sim), year: $('[data-sim-year]', sim) };
+    const out = { occ: $('[data-sim-occ]', sim), area: $('[data-sim-area]', sim), month: $('[data-sim-month]', sim), year: $('[data-sim-year]', sim), list: $('[data-sim-break]', sim) };
     const toInt = (v, lo, hi) => Math.min(hi, Math.max(lo, Math.round(Number(v) || 0)));
     function compute() {
       let area = 0, month = 0;
+      const rows = [];
       nums.forEach(i => {
         const n = toInt(i.value, 0, Number(i.max) || 40);
         area += n * Number(i.dataset.area);
         month += n * Number(i.dataset.rent);
+        const name = sim.querySelector('label[for="' + i.id + '"] span').textContent;
+        rows.push('<li><span>' + n + ' × ' + name + '</span><span>' + fmt.format(n * Number(i.dataset.rent)) + ' MAD / mois</span></li>');
       });
+      if (out.list) out.list.innerHTML = rows.join('');
       const rate = toInt(occ.value, 50, 100) / 100;
       month *= rate;
       out.occ.textContent = Math.round(rate * 100) + ' %';
@@ -122,6 +126,11 @@
       i.addEventListener('change', () => { i.value = toInt(i.value, 0, Number(i.max) || 40); compute(); });
     });
     occ.addEventListener('input', compute);
+    $$('.stepper button', sim).forEach(btn => btn.addEventListener('click', () => {
+      const input = btn.parentElement.querySelector('input');
+      input.value = toInt(Number(input.value) + Number(btn.dataset.step), 0, Number(input.max) || 40);
+      compute();
+    }));
     compute();
   }
 })();

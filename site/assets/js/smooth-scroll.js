@@ -40,6 +40,7 @@
     if (el == null && typeof target !== 'number') return;
     const offset = opts.offset != null ? opts.offset : -navOffset();
     if (lenis) {
+      if (lenis.isStopped) lenis.start();   // ex. demande lancée depuis une fiche qui vient de se fermer
       const to = typeof target === 'number' ? target : el.getBoundingClientRect().top + scrollY + offset;
       // Durée proportionnelle à la distance, bornée : 1,1 s à 2,4 s.
       const d = Math.abs(to - scrollY);
