@@ -142,6 +142,12 @@ h1.display { font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: 1.02; }
 .film__chapter--right p { margin-left: auto; }
 .film__chapter--center { left: 50%; width: min(90vw, 720px); margin-left: calc(min(90vw, 720px) / -2); text-align: center; }
 .film__chapter--hero { width: min(70vw, 900px); margin-top: -9rem; }
+/* Titres d'accroche « location de bureaux » : lignes courtes, à gauche de la tour */
+.film__chapter--hero h1.display { line-height: 1; }
+.film__chapter--hero .lede { max-width: none; color: color-mix(in srgb, var(--ink) 88%, transparent); }
+.film__chapter--rise { width: min(46vw, 640px); }
+.film__chapter--rise .display { font-size: clamp(2.3rem, 4.2vw, 3.9rem); line-height: 1.06; }
+.film__chapter--hero, .film__chapter--rise { text-shadow: 0 2px 24px rgba(0,0,0,.45), 0 1px 3px rgba(0,0,0,.25); }
 
 .film__hint {
   position: absolute; left: 50%; bottom: calc(28px + env(safe-area-inset-bottom)); transform: translateX(-50%);
@@ -461,6 +467,7 @@ h1.display { font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: 1.02; }
     top: auto; bottom: calc(clamp(72px, 13vh, 120px) + env(safe-area-inset-bottom));
   }
   .film__chapter--right p { margin-left: 0; }
+  .film__chapter--hero .lede br { display: none; }
   .film__chapter--center { text-align: center; }
   .display { font-size: clamp(2rem, 9vw, 3rem); }
   h1.display { font-size: clamp(2.5rem, 11.5vw, 4rem); }
