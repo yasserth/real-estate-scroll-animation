@@ -1,37 +1,37 @@
 /* ----------------------------------------------------------------------------
-   Film configuration — the only file you need to edit to wire your video.
+   Film configuration — scroll-controlled image sequence.
 
-   Your MP4 is hosted externally (it's too large for the repo). Paste its public
-   HTTPS URL into `src`. Relative paths (e.g. 'assets/media/film.mp4') also work
-   if you ever decide to ship a small file inside /site.
+   The frames are extracted from the original 30.6 s film with
+   tools/extract-frames.sh (24 fps → 734 WebP frames, 1920×1440, no crop).
+   They are served from this site (assets/frames/). To serve them from a CDN
+   such as Cloudflare R2 instead, upload the folder and set `base` to its
+   public URL, ending in a slash.
 
-   Test a URL without editing this file:
-     https://<user>.github.io/real-estate-scroll-animation/?video=<url-encoded mp4 url>
-   Add &debug to see progress / time / load mode, and &load=stream to force streaming.
+   Add ?debug to the page URL to see frame / load / draw-time stats.
 ---------------------------------------------------------------------------- */
 window.FILM_CONFIG = {
-  video: {
-    src: 'https://pub-8351e6e3f954487f8f8bb5a816edbf2a.r2.dev/1118%20(1).mp4',  // 30.6 s film on Cloudflare R2
-    srcMobile: '',      // optional — lighter 720p / GOP-4 encode for phones (tools/prepare-video.sh makes it)
-    poster: '',         // optional — first frame as an image, e.g. 'assets/media/poster.jpg'
-    posterMobile: '',   // optional — portrait / smaller poster for phones
-    focus: '50% 38%',        // object-position on wide screens — the 4:3 film is cropped top/bottom; bias up to keep the spire
-    focusMobile: '50% 50%',  // object-position on portrait phones (keep the building in frame)
+  sequence: {
+    base: 'assets/frames/',   // relative path → works under /real-estate-scroll-animation/
+    prefix: 'f_',
+    digits: 4,
+    ext: '.webp',
+    count: 734,               // f_0000.webp … f_0733.webp
+    width: 1920,
+    height: 1440,
+    // Focal point for the full-screen cover fit (x, y from 0 to 1). The film is 4:3,
+    // so a 16:9 screen trims a little from top and bottom; 0.38 keeps the spire in frame.
+    focus: [0.5, 0.38],
   },
 
-  // 'auto'   → fetch the whole file as a Blob (perfectly seekable, best scrubbing),
-  //            falling back to streaming if the host blocks CORS.
-  // 'blob'   → same as auto (fallback still applies).
-  // 'stream' → <video src> directly; the host must support HTTP Range requests.
-  load: 'auto',
+  // Total scroll distance of the film, in viewport heights (whole 30 s film).
+  scrollLength: 6,
 
-  // Total scroll distance of the film, in viewport heights. Longer = slower, more
-  // cinematic. Roughly 1 viewport height per 3–5 seconds of video reads well.
-  scrollLength: 6,   // ~5 s of film per screen of scrolling for the 30 s film
+  // GSAP ScrollTrigger scrub: seconds the frame takes to catch up with the
+  // scrollbar. Smooths mouse-wheel steps into continuous motion; 0 = locked.
+  scrub: 0.6,
 
-  // 0..1 — how quickly the displayed frame catches up with the scroll position.
-  // Lower = silkier but laggier; 1 = locked 1:1 to the scrollbar.
-  smoothing: 0.14,
-
+  preload: 48,        // opening frames fetched first (2 s of film)
+  concurrency: 6,     // parallel image requests
+  maxDpr: 2,
   respectReducedMotion: true,
 };
