@@ -137,7 +137,7 @@ h1.display { font-size: clamp(2.8rem, 7.4vw, 6.6rem); }
 .tone-ivory    { --s-bg: var(--ivory);    --s-ink: var(--charcoal); --s-soft: var(--espresso); --s-label: var(--espresso); --s-line: rgba(185,160,120,.55); }
 
 .section {
-  position: relative; padding: 104px 0; background: var(--s-bg); color: var(--s-ink);
+  position: relative; padding: 96px 0; background: var(--s-bg); color: var(--s-ink);
 }
 /* A fine gold thread at the head of every section: the transition between bands. */
 .section::before {
@@ -190,7 +190,7 @@ h1.display { font-size: clamp(2.8rem, 7.4vw, 6.6rem); }
 .facts > div:hover dd { color: var(--gold); }
 
 /* Private viewing */
-.section--enquire { padding: 104px 0 112px; }
+.section--enquire { padding: 96px 0 100px; }
 .section--enquire .ed-index { margin-bottom: 22px; }
 .section--enquire .eyebrow { margin-bottom: 28px; }
 .section--enquire .display { margin: 0 auto; }
