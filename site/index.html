@@ -81,18 +81,28 @@
       <span class="rail__track"><span class="rail__fill" data-film-progress></span></span>
     </aside>
 
-    <!-- ============ Content after the film ============ -->
-    <section class="section" id="residence">
-      <div class="wrap narrow">
-        <span class="eyebrow">The Residence</span>
-        <h2 class="display">An address that needs no introduction.</h2>
-        <p class="lede">Placeholder copy. Describe the residence in two or three measured sentences — the architect, the setting, the idea behind the house.</p>
+    <!-- ============ Content after the film (editorial sections) ============ -->
+    <section class="section tone-ivory" id="residence">
+      <div class="wrap ed-grid">
+        <div class="ed-meta">
+          <span class="ed-index" aria-hidden="true">01</span>
+          <span class="eyebrow">The Residence</span>
+        </div>
+        <div class="ed-body reveal">
+          <h2 class="display">An address that needs no introduction.</h2>
+          <span class="rule" aria-hidden="true"></span>
+          <p class="lede">Placeholder copy. Describe the residence in two or three measured sentences — the architect, the setting, the idea behind the house.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section section--line" id="details">
+    <section class="section tone-dark section--details" id="details">
       <div class="wrap">
-        <dl class="facts">
+        <div class="ed-head">
+          <span class="ed-index" aria-hidden="true">02</span>
+          <span class="eyebrow">Details</span>
+        </div>
+        <dl class="facts reveal">
           <div><dt>Interior</dt><dd>— m²</dd></div>
           <div><dt>Grounds</dt><dd>— ha</dd></div>
           <div><dt>Suites</dt><dd>—</dd></div>
@@ -101,28 +111,34 @@
       </div>
     </section>
 
-    <section class="section" id="location">
-      <div class="wrap split">
-        <div>
+    <section class="section tone-ivory" id="location">
+      <div class="wrap ed-grid">
+        <div class="ed-meta">
+          <span class="ed-index" aria-hidden="true">03</span>
           <span class="eyebrow">Location</span>
-          <h2 class="display">Placeholder location.</h2>
         </div>
-        <p>Placeholder copy about the surroundings, proximity, and privacy of the estate.</p>
+        <div class="ed-body ed-split reveal">
+          <h2 class="display">Placeholder location.</h2>
+          <p>Placeholder copy about the surroundings, proximity, and privacy of the estate.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section section--enquire" id="enquire">
-      <div class="wrap narrow center">
+    <section class="section tone-espresso section--enquire" id="enquire">
+      <div class="wrap narrow center reveal">
+        <span class="ed-index" aria-hidden="true">04</span>
         <span class="eyebrow">Private viewing</span>
         <h2 class="display">Visits are arranged personally.</h2>
+        <span class="rule rule--center" aria-hidden="true"></span>
         <p class="lede">Placeholder contact details.</p>
         <a class="btn" href="mailto:viewings@example.com">viewings@example.com</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer tone-dark">
     <div class="wrap footer__row">
+      <span class="footer__brand" aria-hidden="true">Aurelle</span>
       <span>© <span data-year></span> Aurelle Residences</span>
       <span>All imagery is indicative.</span>
     </div>
@@ -132,6 +148,7 @@
   <script src="assets/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/js/film.config.js"></script>
   <script src="assets/js/scroll-sequence.js"></script>
+  <script src="assets/js/sections.js"></script>
   <script>
     document.querySelector('[data-year]').textContent = new Date().getFullYear();
     window.film = mountScrollSequence(document.querySelector('[data-film]'), window.FILM_CONFIG);
