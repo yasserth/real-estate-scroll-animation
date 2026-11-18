@@ -1,6 +1,7 @@
 # Project rules — real-estate-scroll-animation
 
-Luxury real-estate site: ONE continuous, pre-rendered architectural film scrubbed by scroll.
+AURELLE BUSINESS RESIDENCE — French-language showcase site for a fictional premium business residence
+(office floors to let), aimed at investors. Opens with ONE continuous architectural film scrubbed by scroll.
 
 ## Hard constraints (from the owner)
 - **Never generate media.** No AI images, no AI video, no new scenes, no Higgsfield/Monid/Codex
@@ -18,8 +19,20 @@ Luxury real-estate site: ONE continuous, pre-rendered architectural film scrubbe
   - `assets/js/film.config.js` — frame count/path, focal point, scroll length, scrub smoothing
   - `assets/js/scroll-sequence.js` — Canvas + GSAP ScrollTrigger image-sequence engine
   - `assets/vendor/` — GSAP 3.12.5 + ScrollTrigger (vendored)
-  - `index.html` — chapters are `[data-film-chapter]` with `data-from`/`data-to` (0–1 of the film)
+  - `index.html` — hero chapters are `[data-film-chapter]` with `data-from`/`data-to` (0–1 of the film);
+    then sections 02 Vision → 09 Contact, footer, and the three plateau `<dialog>`s
+  - `mentions-legales.html` — legal & privacy page (placeholders « à compléter »)
+  - `assets/css/site.css` — palette navy #171E25 / gold #C9AE83 / ivory #F4F0E8 / slate #7B858B / graphite #333D43
+  - `assets/js/sections.js` — nav states, reveals, plateau dialogs, rental simulator
+  - `assets/js/contact.js` + `site.config.js` — form validation; set `contact.endpoint` to receive requests
 - `tools/extract-frames.sh` — rebuilds the frames from the original MP4 (colour-accurate BT.709→WebP)
+
+## Content rules
+- The hero animation (frames, canvas, `scroll-sequence.js`, `film.config.js`, film scroll length) is frozen.
+- Section images are frames of the film (`assets/frames/f_XXXX.webp`), always captioned « visuel conceptuel ».
+- Never present fictional figures as facts: surfaces/rents are « indicatifs, non contractuels »; the simulator is
+  « hypothèses de simulation »; services are « envisagés — à confirmer »; location/contacts « à confirmer/compléter ».
+- The form must never show a success message unless the configured endpoint answers 2xx.
 
 ## Testing
 Serve `site/` and open `?debug` to see frame / loaded / draw-time stats.

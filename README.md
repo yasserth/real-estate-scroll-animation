@@ -1,6 +1,6 @@
 # real-estate-scroll-animation
 
-Luxury real-estate website (AURELLE) with a cinematic, scroll-controlled architectural film.
+**AURELLE BUSINESS RESIDENCE** — site vitrine (FR) d'un projet conceptuel de résidence d'affaires premium, destiné à une présentation investisseurs. Il s'ouvre sur un film architectural piloté par le défilement.
 Scrolling down advances the film frame by frame; scrolling up reverses it.
 
 ## How it works
@@ -29,3 +29,20 @@ The frames (~66 MB) are served from Pages. To serve them from R2 instead, upload
 `site/assets/frames/` and set `sequence.base` to the public folder URL.
 
 Local preview: `python3 -m http.server -d site 8000` → http://localhost:8000/?debug
+
+## Formulaire de contact — à connecter
+
+Le formulaire « Demander une présentation privée » valide réellement les saisies, mais **n'envoie rien tant
+qu'aucun service de réception n'est configuré** : le visiteur en est informé, sans fausse confirmation.
+
+Pour l'activer, renseigner `site/assets/js/site.config.js` :
+
+```js
+contact: {
+  endpoint: 'https://formspree.io/f/xxxxxxx',   // ou Getform, Basin, votre API / CRM (POST FormData)
+  fallbackEmail: 'contact@exemple.ma',          // proposé en secours en cas d'échec
+}
+```
+
+La confirmation ne s'affiche que si le service répond avec succès (HTTP 2xx). Compléter ensuite
+`site/mentions-legales.html` (éditeur, responsable du traitement, durée de conservation, CNDP).

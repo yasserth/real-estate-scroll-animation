@@ -1,78 +1,87 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Aurelle Residences — Private Estate</title>
-  <meta name="description" content="A private architectural residence. Scroll to walk through the estate." />
-  <meta name="theme-color" content="#0f0e0c" />
+  <title>AURELLE Business Residence — L'adresse de ceux qui voient plus grand</title>
+  <meta name="description" content="AURELLE Business Residence : résidence d'affaires premium proposant des plateaux de bureaux modulables à la location. Projet conceptuel — présentation investisseurs." />
+  <meta name="theme-color" content="#171E25" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23171E25'/%3E%3Cpath d='M8 26 16 4 24 26M11.3 17h9.4' fill='none' stroke='%23C9AE83' stroke-width='1.6'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" />
   <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body>
-  <a class="skip" href="#residence">Skip the film</a>
+  <a class="skip" href="#vision">Passer l'introduction</a>
 
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="Aurelle Residences — home">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__name">Aurelle</span>
+  <!-- ===================== Navigation ===================== -->
+  <header class="topbar" data-topbar>
+    <a class="brand" href="#top" aria-label="AURELLE Business Residence — retour en haut de page">
+      <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <rect x="0.75" y="0.75" width="38.5" height="38.5" />
+        <path d="M11 32 20 7 29 32" /><path d="M14.6 22h10.8" /><path d="M20 7V3.5" />
+      </svg>
+      <span class="brand__text">
+        <span class="brand__name">Aurelle</span>
+        <span class="brand__sub">Business Residence</span>
+      </span>
     </a>
-    <nav class="topnav" aria-label="Primary">
-      <a href="#residence">The Residence</a>
-      <a href="#details">Details</a>
-      <a href="#location">Location</a>
+    <nav class="topnav" aria-label="Navigation principale">
+      <a href="#vision">Vision</a>
+      <a href="#residence">La Résidence</a>
+      <a href="#espaces">Espaces</a>
+      <a href="#services">Services</a>
+      <a href="#investir">Investir</a>
+      <a href="#localisation">Localisation</a>
     </nav>
-    <a class="topcta" href="#enquire">Private viewing</a>
+    <a class="topcta" href="#contact">Visite privée</a>
   </header>
 
   <main id="top">
-    <!-- ============ The film: one continuous video, scrubbed by scroll ============ -->
-    <section class="film" data-film aria-label="Architectural walkthrough film">
+    <!-- ============ 01 — Expérience cinématographique (animation inchangée) ============ -->
+    <section class="film" data-film aria-label="Film de présentation de la résidence, piloté par le défilement">
       <div class="film__stage" data-film-stage>
         <img class="film__poster" data-film-poster alt="" decoding="async" hidden />
         <canvas class="film__video" data-film-canvas aria-hidden="true"></canvas>
         <div class="film__veil" aria-hidden="true"></div>
 
-        <!-- Chapters: copy that fades in over a slice of the film.
-             data-from / data-to are fractions of the film (0 = first frame, 1 = last).
-             Adjust them to match the moments in your video. -->
+        <!-- Textes superposés : data-from / data-to = fraction du film (0 = premier plan, 1 = dernier). -->
         <div class="film__chapter film__chapter--hero" data-film-chapter data-from="0" data-to="0.14">
-          <span class="eyebrow">A private estate</span>
-          <h1 class="display">Architecture,<br /><em>in quiet motion.</em></h1>
-          <p class="lede">Scroll to walk through the residence.</p>
+          <span class="eyebrow">Aurelle Business Residence</span>
+          <h1 class="display">L'adresse de ceux<br /><em>qui voient plus grand.</em></h1>
+          <p class="lede">Une nouvelle dimension pour vos ambitions professionnelles.</p>
         </div>
 
         <div class="film__chapter" data-film-chapter data-from="0.2" data-to="0.38">
-          <span class="eyebrow">I — Arrival</span>
-          <h2 class="display">A threshold of stone and light.</h2>
-          <p>Replace with a line about the approach, the façade, the first impression.</p>
+          <span class="eyebrow">I — L'élévation</span>
+          <h2 class="display">Une silhouette qui s'impose sur l'horizon.</h2>
+          <p>Une architecture verticale pensée comme un repère : visible, affirmée, durable.</p>
         </div>
 
         <div class="film__chapter film__chapter--right" data-film-chapter data-from="0.42" data-to="0.6">
-          <span class="eyebrow">II — Living</span>
-          <h2 class="display">Volumes made for gathering.</h2>
-          <p>Replace with a line about the principal living spaces.</p>
+          <span class="eyebrow">II — La façade</span>
+          <h2 class="display">Le verre, la lumière, la précision.</h2>
+          <p>Une enveloppe contemporaine qui donne à chaque entreprise une image institutionnelle forte.</p>
         </div>
 
         <div class="film__chapter" data-film-chapter data-from="0.64" data-to="0.82">
-          <span class="eyebrow">III — Private quarters</span>
-          <h2 class="display">Stillness, by design.</h2>
-          <p>Replace with a line about the suites, materials, views.</p>
+          <span class="eyebrow">III — Les plateaux</span>
+          <h2 class="display">Des espaces ouverts sur le monde.</h2>
+          <p>Des plateaux lumineux et modulables, conçus pour accueillir vos équipes et vos clients.</p>
         </div>
 
         <div class="film__chapter film__chapter--center" data-film-chapter data-from="0.88" data-to="1" data-hold>
-          <span class="eyebrow">Aurelle Residences</span>
-          <h2 class="display">By appointment only.</h2>
-          <a class="btn" href="#enquire">Arrange a private viewing</a>
+          <span class="eyebrow">Aurelle Business Residence</span>
+          <h2 class="display">Une nouvelle perspective vous attend.</h2>
+          <a class="btn" href="#vision">Découvrir la résidence</a>
         </div>
 
         <div class="film__loader" data-film-loader hidden>
           <span class="film__loader-bar"></span>
           <span class="film__loader-label" data-film-loader-label></span>
         </div>
-        <div class="film__hint" aria-hidden="true"><span>Scroll</span><i></i></div>
+        <div class="film__hint" aria-hidden="true"><span>Défiler pour explorer</span><i></i></div>
       </div>
     </section>
 
@@ -81,77 +90,402 @@
       <span class="rail__track"><span class="rail__fill" data-film-progress></span></span>
     </aside>
 
-    <!-- ============ Content after the film (editorial sections) ============ -->
-    <section class="section tone-ivory" id="residence">
-      <div class="wrap ed-grid">
-        <div class="ed-meta">
-          <span class="ed-index" aria-hidden="true">01</span>
-          <span class="eyebrow">The Residence</span>
-        </div>
-        <div class="ed-body reveal">
-          <h2 class="display">An address that needs no introduction.</h2>
-          <span class="rule" aria-hidden="true"></span>
-          <p class="lede">Placeholder copy. Describe the residence in two or three measured sentences — the architect, the setting, the idea behind the house.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section tone-dark section--details" id="details">
+    <!-- ============ 02 — La vision ============ -->
+    <section class="sec tone-light sec--vision" id="vision" aria-labelledby="vision-title">
       <div class="wrap">
-        <div class="ed-head">
-          <span class="ed-index" aria-hidden="true">02</span>
-          <span class="eyebrow">Details</span>
-        </div>
-        <dl class="facts reveal">
-          <div><dt>Interior</dt><dd>— m²</dd></div>
-          <div><dt>Grounds</dt><dd>— ha</dd></div>
-          <div><dt>Suites</dt><dd>—</dd></div>
-          <div><dt>Completion</dt><dd>—</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <section class="section tone-ivory" id="location">
-      <div class="wrap ed-grid">
-        <div class="ed-meta">
-          <span class="ed-index" aria-hidden="true">03</span>
-          <span class="eyebrow">Location</span>
-        </div>
-        <div class="ed-body ed-split reveal">
-          <h2 class="display">Placeholder location.</h2>
-          <p>Placeholder copy about the surroundings, proximity, and privacy of the estate.</p>
+        <div class="sec-label reveal"><span class="sec-label__num">02</span><span class="sec-label__txt">La vision</span></div>
+        <h2 class="vision__title reveal" id="vision-title">
+          <span class="vision__line">Plus qu'une adresse.</span>
+          <span class="vision__line vision__line--offset"><em>Une nouvelle perspective.</em></span>
+        </h2>
+        <div class="vision__body reveal">
+          <span class="hairline" aria-hidden="true"></span>
+          <p class="vision__text">AURELLE BUSINESS RESIDENCE réinvente l'environnement de travail à travers une architecture contemporaine, des espaces modulables et une expérience professionnelle pensée dans les moindres détails.</p>
+          <ul class="vision__keys" aria-label="Les fondements du projet">
+            <li>Architecture</li><li>Modularité</li><li>Représentation</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="section tone-espresso section--enquire" id="enquire">
-      <div class="wrap narrow center reveal">
-        <span class="ed-index" aria-hidden="true">04</span>
-        <span class="eyebrow">Private viewing</span>
-        <h2 class="display">Visits are arranged personally.</h2>
-        <span class="rule rule--center" aria-hidden="true"></span>
-        <p class="lede">Placeholder contact details.</p>
-        <a class="btn" href="mailto:viewings@example.com">viewings@example.com</a>
+    <!-- ============ 03 — La résidence ============ -->
+    <section class="sec tone-dark sec--residence" id="residence" aria-labelledby="residence-title">
+      <div class="residence">
+        <figure class="residence__hero media reveal">
+          <img src="assets/frames/f_0168.webp" alt="La tour AURELLE émergeant au-dessus d'une mer de nuages au coucher du soleil" width="1920" height="1440" loading="lazy" decoding="async" />
+          <figcaption>Visuel conceptuel — extrait du film de présentation</figcaption>
+        </figure>
+        <div class="residence__intro">
+          <div class="sec-label reveal"><span class="sec-label__num">03</span><span class="sec-label__txt">La résidence</span></div>
+          <h2 class="h-display reveal" id="residence-title">Une destination professionnelle de prestige.</h2>
+          <p class="body-lg reveal">Pensée comme un repère dans la ville, AURELLE réunit sous une même signature architecturale des plateaux de bureaux, des espaces de réception et des services destinés aux entreprises qui veulent donner à leur adresse la valeur d'une déclaration.</p>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <ol class="pillars">
+          <li class="pillar reveal"><span class="pillar__num">01</span><h3 class="pillar__title">Architecture contemporaine</h3><p>Une écriture verticale, des lignes nettes et une façade vitrée qui affirment l'identité de chaque occupant.</p></li>
+          <li class="pillar reveal"><span class="pillar__num">02</span><h3 class="pillar__title">Plateaux flexibles</h3><p>Des surfaces conçues pour évoluer avec l'entreprise : open space, bureaux de direction, salles de réunion.</p></li>
+          <li class="pillar reveal"><span class="pillar__num">03</span><h3 class="pillar__title">Espaces lumineux</h3><p>La lumière naturelle comme matériau principal, au service du confort et de la concentration.</p></li>
+          <li class="pillar reveal"><span class="pillar__num">04</span><h3 class="pillar__title">Vues panoramiques</h3><p>Des perspectives dégagées qui font de chaque plateau un lieu de représentation.</p></li>
+          <li class="pillar reveal"><span class="pillar__num">05</span><h3 class="pillar__title">Circulations élégantes</h3><p>Des parcours d'accueil fluides et soignés, de l'entrée jusqu'aux étages.</p></li>
+          <li class="pillar reveal"><span class="pillar__num">06</span><h3 class="pillar__title">Image institutionnelle forte</h3><p>Une adresse qui inspire confiance aux clients, aux partenaires et aux talents.</p></li>
+        </ol>
+      </div>
+
+      <div class="wrap duo">
+        <figure class="media duo__a reveal">
+          <img src="assets/frames/f_0360.webp" alt="Le couronnement vitré de la tour, éclairé par la lumière dorée du soir" width="1920" height="1440" loading="lazy" decoding="async" />
+          <figcaption>Le couronnement — visuel conceptuel</figcaption>
+        </figure>
+        <figure class="media duo__b reveal">
+          <img src="assets/frames/f_0552.webp" alt="Un plateau intérieur aux larges baies vitrées ouvrant sur l'horizon" width="1920" height="1440" loading="lazy" decoding="async" />
+          <figcaption>Un plateau en étage — visuel conceptuel</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ 04 — Nos espaces professionnels ============ -->
+    <section class="sec tone-light sec--espaces" id="espaces" aria-labelledby="espaces-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <div class="sec-label reveal"><span class="sec-label__num">04</span><span class="sec-label__txt">Nos espaces professionnels</span></div>
+          <h2 class="h-display reveal" id="espaces-title">Trois plateaux, <em>une même exigence.</em></h2>
+          <p class="sec-head__aside reveal">Chaque plateau est pensé comme un outil de travail et un lieu de représentation. Trois formats pour accompagner chaque étape de développement.</p>
+        </header>
+
+        <div class="offers">
+          <article class="offer reveal" aria-labelledby="offer-1">
+            <figure class="offer__media"><img src="assets/frames/f_0480.webp" alt="" width="1920" height="1440" loading="lazy" decoding="async" /></figure>
+            <div class="offer__body">
+              <div class="offer__tier"><span>I</span>Essentiel</div>
+              <h3 class="offer__name" id="offer-1">Plateau Signature</h3>
+              <dl class="offer__figures">
+                <div><dt>Surface indicative</dt><dd>100 <small>m²</small></dd></div>
+                <div><dt>Loyer indicatif</dt><dd><small>à partir de</small> 15 000 <small>MAD / mois</small></dd></div>
+              </dl>
+              <p class="offer__text">Idéal pour les cabinets professionnels et les entreprises en développement.</p>
+              <div class="offer__actions">
+                <button class="link-arrow" type="button" data-open-plateau="signature">Découvrir le plateau</button>
+                <a class="btn-line" href="#contact" data-request="signature">Demander une visite</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer offer--featured reveal" aria-labelledby="offer-2">
+            <figure class="offer__media"><img src="assets/frames/f_0528.webp" alt="" width="1920" height="1440" loading="lazy" decoding="async" /></figure>
+            <div class="offer__body">
+              <div class="offer__tier"><span>II</span>Prestige</div>
+              <h3 class="offer__name" id="offer-2">Plateau Executive</h3>
+              <dl class="offer__figures">
+                <div><dt>Surface indicative</dt><dd>180 <small>m²</small></dd></div>
+                <div><dt>Loyer indicatif</dt><dd><small>à partir de</small> 25 000 <small>MAD / mois</small></dd></div>
+              </dl>
+              <p class="offer__text">Destiné aux entreprises souhaitant associer confort, flexibilité et représentation.</p>
+              <div class="offer__actions">
+                <button class="link-arrow" type="button" data-open-plateau="executive">Découvrir le plateau</button>
+                <a class="btn-line" href="#contact" data-request="executive">Demander une visite</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer reveal" aria-labelledby="offer-3">
+            <figure class="offer__media"><img src="assets/frames/f_0600.webp" alt="" width="1920" height="1440" loading="lazy" decoding="async" /></figure>
+            <div class="offer__body">
+              <div class="offer__tier"><span>III</span>Excellence</div>
+              <h3 class="offer__name" id="offer-3">Plateau Panorama</h3>
+              <dl class="offer__figures">
+                <div><dt>Surface indicative</dt><dd>300 <small>m²</small></dd></div>
+                <div><dt>Loyer indicatif</dt><dd><small>à partir de</small> 40 000 <small>MAD / mois</small></dd></div>
+              </dl>
+              <p class="offer__text">Une proposition exclusive pour les entreprises recherchant une adresse distinctive et des espaces généreux.</p>
+              <div class="offer__actions">
+                <button class="link-arrow" type="button" data-open-plateau="panorama">Découvrir le plateau</button>
+                <a class="btn-line" href="#contact" data-request="panorama">Demander une visite</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="fineprint reveal">Surfaces et loyers indicatifs : hypothèses de présentation, non contractuelles, hors charges et taxes. Visuels conceptuels.</p>
+      </div>
+    </section>
+
+    <!-- ============ 05 — Une expérience professionnelle d'exception ============ -->
+    <section class="sec tone-graphite sec--services" id="services" aria-labelledby="services-title">
+      <div class="wrap services">
+        <div class="services__lead">
+          <div class="sec-label reveal"><span class="sec-label__num">05</span><span class="sec-label__txt">Services</span></div>
+          <h2 class="h-display reveal" id="services-title">Une expérience professionnelle <em>d'exception.</em></h2>
+          <p class="body-lg reveal">Au-delà des murs, AURELLE est pensée comme un environnement de services qui libère les entreprises des contraintes du quotidien.</p>
+          <figure class="media services__media reveal">
+            <img src="assets/frames/f_0456.webp" alt="Un espace d'accueil intérieur, sols réfléchissants et grandes baies vitrées" width="1920" height="1440" loading="lazy" decoding="async" />
+            <figcaption>Espaces communs — visuel conceptuel</figcaption>
+          </figure>
+          <p class="tag-note reveal">Programme de services envisagé — à confirmer</p>
+        </div>
+        <ol class="services__list">
+          <li class="service reveal"><span class="service__num">01</span><div><h3>Accueil et conciergerie d'entreprise</h3><p>Un accueil personnalisé pour vos visiteurs et un relais pour les demandes du quotidien.</p></div></li>
+          <li class="service reveal"><span class="service__num">02</span><div><h3>Sécurité et contrôle des accès</h3><p>Des accès maîtrisés pour garantir la sérénité des occupants et la confidentialité des échanges.</p></div></li>
+          <li class="service reveal"><span class="service__num">03</span><div><h3>Espaces de réunion</h3><p>Des salles à réserver, prêtes à accueillir comités, présentations et rendez-vous clients.</p></div></li>
+          <li class="service reveal"><span class="service__num">04</span><div><h3>Espaces de réception</h3><p>Des lieux pensés pour recevoir, célébrer et représenter l'entreprise.</p></div></li>
+          <li class="service reveal"><span class="service__num">05</span><div><h3>Connectivité professionnelle</h3><p>Une infrastructure envisagée pour répondre aux usages numériques des entreprises.</p></div></li>
+          <li class="service reveal"><span class="service__num">06</span><div><h3>Stationnement</h3><p>Des solutions de stationnement envisagées pour les occupants et leurs visiteurs.</p></div></li>
+          <li class="service reveal"><span class="service__num">07</span><div><h3>Maintenance et gestion des espaces</h3><p>Une gestion attentive pour des espaces toujours impeccables et opérationnels.</p></div></li>
+          <li class="service reveal"><span class="service__num">08</span><div><h3>Espaces communs qualitatifs</h3><p>Des lieux de rencontre et de pause qui prolongent l'expérience au-delà du bureau.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 06 — L'architecture au service de l'ambition ============ -->
+    <section class="sec tone-dark sec--archi" id="architecture" aria-labelledby="archi-title">
+      <figure class="archi__banner">
+        <img src="assets/frames/f_0096.webp" alt="La tour AURELLE s'élevant au-dessus des nuages, la ville à l'horizon" width="1920" height="1440" loading="lazy" decoding="async" />
+        <figcaption>Visuel conceptuel — extrait du film de présentation</figcaption>
+        <div class="archi__overlay">
+          <div class="wrap">
+            <div class="sec-label reveal"><span class="sec-label__num">06</span><span class="sec-label__txt">Architecture</span></div>
+            <h2 class="archi__title reveal" id="archi-title">L'architecture <br /><em>au service de l'ambition.</em></h2>
+          </div>
+        </div>
+      </figure>
+      <div class="wrap">
+        <div class="triptych">
+          <figure class="tri reveal">
+            <div class="media"><img src="assets/frames/f_0408.webp" alt="Détail de la façade vitrée et de sa structure" width="1920" height="1440" loading="lazy" decoding="async" /></div>
+            <figcaption><span class="tri__k">Matière</span><span class="tri__t">Le verre et l'acier dessinent une façade précise, qui capte et réfléchit la lumière du jour.</span></figcaption>
+          </figure>
+          <figure class="tri reveal">
+            <div class="media"><img src="assets/frames/f_0672.webp" alt="Le volume du couronnement de la tour au-dessus des nuages" width="1920" height="1440" loading="lazy" decoding="async" /></div>
+            <figcaption><span class="tri__k">Volume</span><span class="tri__t">Une silhouette élancée dont les proportions confèrent à l'adresse sa présence.</span></figcaption>
+          </figure>
+          <figure class="tri reveal">
+            <div class="media"><img src="assets/frames/f_0576.webp" alt="La lumière du soir traversant de grandes baies vitrées" width="1920" height="1440" loading="lazy" decoding="async" /></div>
+            <figcaption><span class="tri__k">Lumière</span><span class="tri__t">De larges baies pour faire entrer la lumière naturelle au cœur des plateaux.</span></figcaption>
+          </figure>
+        </div>
+        <p class="fineprint fineprint--dark reveal">Visuels conceptuels extraits du film de présentation du projet. Ils ne constituent pas des photographies d'un bâtiment existant.</p>
+      </div>
+    </section>
+
+    <!-- ============ 07 — Une opportunité d'investissement ============ -->
+    <section class="sec tone-light sec--invest" id="investir" aria-labelledby="invest-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <div class="sec-label reveal"><span class="sec-label__num">07</span><span class="sec-label__txt">Une opportunité d'investissement</span></div>
+          <h2 class="h-display reveal" id="invest-title">Un actif pensé pour <em>créer de la valeur.</em></h2>
+          <p class="sec-head__aside reveal">AURELLE associe une adresse de prestige à un modèle locatif diversifié, conçu pour répondre durablement à la demande des entreprises.</p>
+        </header>
+
+        <ol class="theses">
+          <li class="thesis reveal"><span class="thesis__num">I</span><h3>Positionnement immobilier premium</h3><p>Une offre de bureaux haut de gamme, pensée pour se distinguer dans son marché.</p></li>
+          <li class="thesis reveal"><span class="thesis__num">II</span><h3>Diversification des surfaces locatives</h3><p>Trois formats de plateaux pour répartir le risque locatif sur plusieurs profils d'occupants.</p></li>
+          <li class="thesis reveal"><span class="thesis__num">III</span><h3>Clientèle professionnelle ciblée</h3><p>Sièges régionaux, cabinets de conseil, sociétés internationales et professions libérales.</p></li>
+          <li class="thesis reveal"><span class="thesis__num">IV</span><h3>Potentiel de revenus locatifs récurrents</h3><p>Un modèle fondé sur des loyers mensuels, propice à des flux réguliers.</p></li>
+          <li class="thesis reveal"><span class="thesis__num">V</span><h3>Flexibilité de commercialisation</h3><p>Des plateaux combinables ou divisibles pour s'adapter à la demande.</p></li>
+          <li class="thesis reveal"><span class="thesis__num">VI</span><h3>Valorisation à long terme</h3><p>Une architecture et des services qui soutiennent l'attractivité de l'actif dans la durée.</p></li>
+        </ol>
+
+        <div class="eco reveal" aria-labelledby="eco-title">
+          <div class="eco__intro">
+            <span class="eco__kicker">Vision économique</span>
+            <h3 class="eco__title" id="eco-title">Le modèle locatif, <em>en simulation.</em></h3>
+            <p>Ajustez une composition hypothétique de plateaux et un taux d'occupation pour visualiser l'ordre de grandeur des revenus locatifs bruts, sur la base des loyers indicatifs de présentation.</p>
+            <p class="eco__badge">Hypothèses de simulation</p>
+          </div>
+          <form class="sim" data-sim aria-label="Simulateur de revenus locatifs" onsubmit="return false">
+            <div class="sim__rows">
+              <div class="sim__row"><label for="sim-signature"><span>Plateau Signature</span><small>100 m² · 15 000 MAD / mois</small></label><input id="sim-signature" type="number" min="0" max="40" step="1" value="6" inputmode="numeric" data-rent="15000" data-area="100" /></div>
+              <div class="sim__row"><label for="sim-executive"><span>Plateau Executive</span><small>180 m² · 25 000 MAD / mois</small></label><input id="sim-executive" type="number" min="0" max="40" step="1" value="4" inputmode="numeric" data-rent="25000" data-area="180" /></div>
+              <div class="sim__row"><label for="sim-panorama"><span>Plateau Panorama</span><small>300 m² · 40 000 MAD / mois</small></label><input id="sim-panorama" type="number" min="0" max="40" step="1" value="2" inputmode="numeric" data-rent="40000" data-area="300" /></div>
+              <div class="sim__row sim__row--range"><label for="sim-occ"><span>Taux d'occupation</span><small>Hypothèse ajustable</small></label><div class="sim__range"><input id="sim-occ" type="range" min="50" max="100" step="1" value="90" /><output for="sim-occ" data-sim-occ>90 %</output></div></div>
+            </div>
+            <dl class="sim__out" aria-live="polite">
+              <div><dt>Surface locative simulée</dt><dd data-sim-area>—</dd></div>
+              <div><dt>Revenu locatif brut mensuel</dt><dd data-sim-month>—</dd></div>
+              <div class="sim__out--main"><dt>Revenu locatif brut annuel</dt><dd data-sim-year>—</dd></div>
+            </dl>
+          </form>
+          <p class="eco__disclaimer">Simulation illustrative fondée sur les loyers indicatifs de présentation et sur des hypothèses librement ajustables. Montants bruts, hors charges, fiscalité, frais de gestion, vacance et indexation. Elle ne constitue ni une prévision, ni une promesse de rendement, ni une offre d'investissement.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 — Localisation et accessibilité ============ -->
+    <section class="sec tone-dark sec--loc" id="localisation" aria-labelledby="loc-title">
+      <div class="wrap loc">
+        <div class="loc__text">
+          <div class="sec-label reveal"><span class="sec-label__num">08</span><span class="sec-label__txt">Localisation</span></div>
+          <h2 class="h-display reveal" id="loc-title">Une adresse <em>stratégique.</em></h2>
+          <p class="body-lg reveal">Le choix du site répond à une exigence simple : placer les entreprises au cœur des flux économiques, à proximité de leurs clients, de leurs partenaires et des grands axes.</p>
+          <dl class="loc__facts reveal">
+            <div><dt>Emplacement</dt><dd>À confirmer dans le cadre du projet</dd></div>
+            <div><dt>Quartier</dt><dd>Quartier d'affaires — à préciser</dd></div>
+          </dl>
+        </div>
+        <div class="loc__map reveal" role="img" aria-label="Emplacement réservé à la future carte interactive">
+          <div class="loc__grid" aria-hidden="true"></div>
+          <div class="loc__pin" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="0.75" y="0.75" width="38.5" height="38.5" /><path d="M11 32 20 7 29 32" /><path d="M14.6 22h10.8" /></svg></div>
+          <p class="loc__map-note">Carte interactive — intégration prévue</p>
+          <ul class="loc__links">
+            <li><span>Grands axes routiers</span><em>à renseigner</em></li>
+            <li><span>Transports en commun</span><em>à renseigner</em></li>
+            <li><span>Gare ferroviaire</span><em>à renseigner</em></li>
+            <li><span>Aéroport</span><em>à renseigner</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 — Visite privée et contact ============ -->
+    <section class="sec tone-light sec--contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact">
+        <div class="contact__lead">
+          <div class="sec-label reveal"><span class="sec-label__num">09</span><span class="sec-label__txt">Visite privée</span></div>
+          <h2 class="h-display reveal" id="contact-title">Votre prochaine adresse <em>commence ici.</em></h2>
+          <p class="body-lg reveal">Découvrez un environnement à la hauteur de vos ambitions.</p>
+          <p class="contact__note reveal">Nos équipes vous proposent une présentation privée du projet, des plateaux et du programme de services, en toute confidentialité.</p>
+        </div>
+
+        <form class="form reveal" id="contact-form" novalidate data-contact-form>
+          <div class="form__grid">
+            <div class="field">
+              <label for="f-name">Nom et prénom <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="nom" type="text" autocomplete="name" required maxlength="120" aria-describedby="f-name-err" />
+              <p class="field__err" id="f-name-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-company">Entreprise <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-company" name="entreprise" type="text" autocomplete="organization" required maxlength="160" aria-describedby="f-company-err" />
+              <p class="field__err" id="f-company-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-email">Adresse e-mail <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="160" aria-describedby="f-email-err" />
+              <p class="field__err" id="f-email-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">Téléphone <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-phone" name="telephone" type="tel" autocomplete="tel" required maxlength="25" placeholder="+212 6 00 00 00 00" aria-describedby="f-phone-err" />
+              <p class="field__err" id="f-phone-err" aria-live="polite"></p>
+            </div>
+            <div class="field field--wide">
+              <label for="f-surface">Surface recherchée <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-surface" name="surface" required aria-describedby="f-surface-err">
+                <option value="">Sélectionnez une option</option>
+                <option value="signature">Plateau Signature — environ 100 m²</option>
+                <option value="executive">Plateau Executive — environ 180 m²</option>
+                <option value="panorama">Plateau Panorama — environ 300 m²</option>
+                <option value="sur-mesure">Plusieurs plateaux / surface sur mesure</option>
+                <option value="a-definir">À définir ensemble</option>
+              </select>
+              <p class="field__err" id="f-surface-err" aria-live="polite"></p>
+            </div>
+            <div class="field field--wide">
+              <label for="f-message">Message <span class="opt">(facultatif)</span></label>
+              <textarea id="f-message" name="message" rows="4" maxlength="2000" aria-describedby="f-message-err"></textarea>
+              <p class="field__err" id="f-message-err" aria-live="polite"></p>
+            </div>
+            <div class="field field--wide field--check">
+              <input id="f-consent" name="consentement" type="checkbox" required aria-describedby="f-consent-err" />
+              <label for="f-consent">J'accepte que mes informations soient utilisées pour être recontacté(e) au sujet de ce projet. <a href="mentions-legales.html#donnees">En savoir plus</a></label>
+              <p class="field__err" id="f-consent-err" aria-live="polite"></p>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="f-website">Site web</label><input id="f-website" name="site_web" type="text" tabindex="-1" autocomplete="off" /></div>
+          </div>
+          <div class="form__foot">
+            <button class="btn-solid" type="submit" data-submit>Demander une présentation privée</button>
+            <p class="form__req"><span aria-hidden="true">*</span> Champs obligatoires</p>
+          </div>
+          <div class="form__status" role="status" aria-live="polite" data-form-status hidden></div>
+        </form>
       </div>
     </section>
   </main>
 
+  <!-- ============ 10 — Footer ============ -->
   <footer class="footer tone-dark">
-    <div class="wrap footer__row">
-      <span class="footer__brand" aria-hidden="true">Aurelle</span>
-      <span>© <span data-year></span> Aurelle Residences</span>
-      <span>All imagery is indicative.</span>
+    <div class="wrap footer__top">
+      <div class="footer__brand">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="0.75" y="0.75" width="38.5" height="38.5" /><path d="M11 32 20 7 29 32" /><path d="M14.6 22h10.8" /><path d="M20 7V3.5" /></svg>
+        <div>
+          <p class="footer__name">Aurelle Business Residence</p>
+          <p class="footer__sign">L'adresse de ceux qui voient plus grand.</p>
+        </div>
+      </div>
+      <nav class="footer__nav" aria-label="Navigation du pied de page">
+        <a href="#vision">Vision</a><a href="#residence">La Résidence</a><a href="#espaces">Espaces</a><a href="#services">Services</a>
+        <a href="#investir">Investir</a><a href="#localisation">Localisation</a><a href="#contact">Visite privée</a>
+      </nav>
+      <address class="footer__contact">
+        <span>Adresse — à compléter</span>
+        <span>Téléphone — à compléter</span>
+        <span>E-mail — à compléter</span>
+      </address>
+    </div>
+    <div class="wrap footer__bottom">
+      <span>© <span data-year></span> AURELLE Business Residence</span>
+      <a href="mentions-legales.html">Mentions légales &amp; confidentialité</a>
+      <span class="footer__concept">Projet conceptuel — Présentation investisseurs</span>
     </div>
   </footer>
 
+  <!-- ============ Fiches plateaux (fenêtres « Découvrir le plateau ») ============ -->
+  <dialog class="plateau" id="plateau-signature" aria-labelledby="pd-signature">
+    <div class="plateau__media"><img src="assets/frames/f_0480.webp" alt="" width="1920" height="1440" loading="lazy" decoding="async" /></div>
+    <div class="plateau__body">
+      <p class="plateau__tier">I — Essentiel</p>
+      <h3 class="plateau__name" id="pd-signature">Plateau Signature</h3>
+      <p class="plateau__lead">Un format maîtrisé, pensé pour les équipes qui veulent une adresse de standing sans surdimensionner leurs surfaces.</p>
+      <dl class="plateau__figs"><div><dt>Surface indicative</dt><dd>100 m²</dd></div><div><dt>Loyer indicatif</dt><dd>à partir de 15 000 MAD / mois</dd></div></dl>
+      <h4>Pour qui</h4><p>Cabinets d'avocats, d'expertise ou de conseil, professions libérales, entreprises en développement.</p>
+      <h4>Aménagements envisageables</h4><ul><li>Accueil et salle d'attente</li><li>Bureaux individuels et espace collaboratif</li><li>Salle de réunion attenante</li></ul>
+      <p class="plateau__fine">Surfaces, loyers et aménagements indicatifs, non contractuels.</p>
+      <div class="plateau__actions"><a class="btn-solid" href="#contact" data-request="signature">Demander une visite</a><button class="link-arrow" type="button" data-close>Fermer</button></div>
+    </div>
+    <button class="plateau__x" type="button" data-close aria-label="Fermer la fiche">×</button>
+  </dialog>
+
+  <dialog class="plateau" id="plateau-executive" aria-labelledby="pd-executive">
+    <div class="plateau__media"><img src="assets/frames/f_0528.webp" alt="" width="1920" height="1440" loading="lazy" decoding="async" /></div>
+    <div class="plateau__body">
+      <p class="plateau__tier">II — Prestige</p>
+      <h3 class="plateau__name" id="pd-executive">Plateau Executive</h3>
+      <p class="plateau__lead">L'équilibre entre espace de travail, confort des équipes et représentation auprès des clients.</p>
+      <dl class="plateau__figs"><div><dt>Surface indicative</dt><dd>180 m²</dd></div><div><dt>Loyer indicatif</dt><dd>à partir de 25 000 MAD / mois</dd></div></dl>
+      <h4>Pour qui</h4><p>Directions régionales, PME en croissance, sociétés de services, filiales d'entreprises internationales.</p>
+      <h4>Aménagements envisageables</h4><ul><li>Bureau de direction et espace de réception</li><li>Plateau ouvert modulable</li><li>Salles de réunion et espace de détente</li></ul>
+      <p class="plateau__fine">Surfaces, loyers et aménagements indicatifs, non contractuels.</p>
+      <div class="plateau__actions"><a class="btn-solid" href="#contact" data-request="executive">Demander une visite</a><button class="link-arrow" type="button" data-close>Fermer</button></div>
+    </div>
+    <button class="plateau__x" type="button" data-close aria-label="Fermer la fiche">×</button>
+  </dialog>
+
+  <dialog class="plateau" id="plateau-panorama" aria-labelledby="pd-panorama">
+    <div class="plateau__media"><img src="assets/frames/f_0600.webp" alt="" width="1920" height="1440" loading="lazy" decoding="async" /></div>
+    <div class="plateau__body">
+      <p class="plateau__tier">III — Excellence</p>
+      <h3 class="plateau__name" id="pd-panorama">Plateau Panorama</h3>
+      <p class="plateau__lead">Une adresse distinctive et des volumes généreux, ouverts sur l'horizon, pour les entreprises qui affirment leur rang.</p>
+      <dl class="plateau__figs"><div><dt>Surface indicative</dt><dd>300 m²</dd></div><div><dt>Loyer indicatif</dt><dd>à partir de 40 000 MAD / mois</dd></div></dl>
+      <h4>Pour qui</h4><p>Sièges sociaux et régionaux, directions générales, groupes internationaux.</p>
+      <h4>Aménagements envisageables</h4><ul><li>Espace d'accueil représentatif</li><li>Bureaux de direction et salle du conseil</li><li>Plateaux d'équipes et espaces collaboratifs</li></ul>
+      <p class="plateau__fine">Surfaces, loyers et aménagements indicatifs, non contractuels.</p>
+      <div class="plateau__actions"><a class="btn-solid" href="#contact" data-request="panorama">Demander une visite</a><button class="link-arrow" type="button" data-close>Fermer</button></div>
+    </div>
+    <button class="plateau__x" type="button" data-close aria-label="Fermer la fiche">×</button>
+  </dialog>
+
+  <!-- Animation du hero : chargée en premier, inchangée -->
   <script src="assets/vendor/gsap.min.js"></script>
   <script src="assets/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/js/film.config.js"></script>
   <script src="assets/js/scroll-sequence.js"></script>
-  <script src="assets/js/sections.js"></script>
   <script>
-    document.querySelector('[data-year]').textContent = new Date().getFullYear();
     window.film = mountScrollSequence(document.querySelector('[data-film]'), window.FILM_CONFIG);
   </script>
+  <!-- Sections, simulateur et formulaire -->
+  <script src="assets/js/site.config.js"></script>
+  <script src="assets/js/sections.js"></script>
+  <script src="assets/js/contact.js"></script>
 </body>
 </html>
